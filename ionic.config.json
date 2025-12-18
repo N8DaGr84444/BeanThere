@@ -1,0 +1,7 @@
+{
+  "name": "BeanThere",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
