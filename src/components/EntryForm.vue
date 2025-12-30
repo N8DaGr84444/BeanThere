@@ -32,13 +32,13 @@
         v-model="vibe"
       />
     </ion-item>
-    <ion-item>
-      <ion-checkbox label-placement="end" v-model="wifi"
+    <ion-item lines="full">
+      <ion-checkbox slot="start" label-placement="end" v-model="wifi"
         >Good WiFi?</ion-checkbox
       >
     </ion-item>
-    <ion-item>
-      <ion-checkbox label-placement="end" v-model="seating"
+    <ion-item lines="full">
+      <ion-checkbox slot="start" label-placement="end" v-model="seating"
         >Adequate Seating?</ion-checkbox
       >
     </ion-item>
@@ -50,8 +50,8 @@
         placeholder="Super Latte"
       />
     </ion-item>
-    <ion-item>
-      <ion-checkbox label-placement="end" v-model="foodAvailable"
+    <ion-item lines="full">
+      <ion-checkbox slot="start" label-placement="end" v-model="foodAvailable"
         >Food available?</ion-checkbox
       >
     </ion-item>
@@ -94,12 +94,20 @@
   </ion-list>
   <ion-button
     expand="block"
+    id="open-toast"
     class="ion-margin-top"
     style="width: 90%; margin-left: 5%"
-    @click="() => console.log('Entry Saved!!')"
+    @click="saveEntry"
   >
     Save Entry
   </ion-button>
+  <ion-toast
+    trigger="open-toast"
+    position="top"
+    position-anchor="open-toast"
+    message="Coffee entry saved, drink up!"
+    :duration="5000"
+  ></ion-toast>
 </template>
 
 <script lang="ts" setup>
@@ -112,6 +120,9 @@ import {
   IonRange,
   IonCheckbox,
   IonTextarea,
+  IonSelect,
+  IonSelectOption,
+  IonToast,
 } from "@ionic/vue";
 import { ref, computed } from "vue";
 import CostScale from "@/components/CostScale.vue";
@@ -130,6 +141,25 @@ const selectedFoodOptions = ref<string[]>([]);
 const rating = ref<number>(0);
 const notes = ref<string>("");
 const ratingLabel = computed(() => `${rating.value}/5`);
+
+const resetForm = () => {
+  coffeeShop.value = "";
+  location.value = "";
+  cost.value = 1;
+  drinkName.value = "";
+  vibe.value = 0;
+  wifi.value = false;
+  seating.value = false;
+  foodAvailable.value = false;
+  selectedFoodOptions.value = [];
+  rating.value = 0;
+  notes.value = "";
+};
+
+const saveEntry = () => {
+  console.log("Entry Saved!!");
+  resetForm();
+};
 </script>
 
 <style></style>

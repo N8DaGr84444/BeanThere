@@ -5,7 +5,7 @@
         <ion-title><ion-icon :icon="cafeOutline" />BeanThere</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content :fullscreen="true">
+    <ion-content :fullscreen="false">
       <EntryForm />
     </ion-content>
   </ion-page>
