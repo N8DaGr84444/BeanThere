@@ -2,13 +2,10 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 
-// Font Awesome Icons
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faStroopwafel } from "@fortawesome/free-solid-svg-icons";
-library.add(faStroopwafel);
-
 import { IonicVue } from "@ionic/vue";
+
+// SQLite
+import { defineCustomElements as jeepSqlite } from "jeep-sqlite/loader";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/vue/css/core.css";
@@ -41,7 +38,8 @@ import "@ionic/vue/css/palettes/dark.system.css";
 import "./theme/variables.css";
 
 const app = createApp(App).use(IonicVue).use(router);
-app.component("font-awesome-icon", FontAwesomeIcon);
+
+jeepSqlite(window);
 
 router.isReady().then(() => {
   app.mount("#app");
