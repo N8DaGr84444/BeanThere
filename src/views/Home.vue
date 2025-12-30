@@ -6,19 +6,20 @@
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large"><ion-icon :icon="cafeOutline" />BeanThere</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <ExploreContainer name="BeanThere" />
+      <EntryForm />
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import { cafeOutline } from 'ionicons/icons'
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonIcon,
+} from "@ionic/vue";
+import { cafeOutline } from "ionicons/icons";
+import EntryForm from "@/components/EntryForm.vue";
 </script>
