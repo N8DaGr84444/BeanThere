@@ -1,113 +1,115 @@
 <template>
-  <ion-list>
-    <ion-item>
-      <ion-input
-        label="Coffee Shop Name"
-        v-model="coffeeShop"
-        label-placement="stacked"
-        placeholder="World's Greatest Coffee"
-      />
-    </ion-item>
-    <ion-item>
-      <ion-input
-        label="Location"
-        v-model="location"
-        label-placement="stacked"
-        placeholder="Earth"
-      />
-    </ion-item>
-    <ion-item>
-      <ion-label>Cost</ion-label>
-      <CostScale v-model="cost" />
-    </ion-item>
-    <ion-item>
-      <ion-label>Vibe</ion-label>
-      <ion-range
-        :label="vibeLabel"
-        label-placement="end"
-        :min="1"
-        :max="5"
-        :step="1"
-        snaps
-        v-model="vibe"
-      />
-    </ion-item>
-    <ion-item lines="full">
-      <ion-checkbox slot="start" label-placement="end" v-model="wifi"
-        >Good WiFi?</ion-checkbox
-      >
-    </ion-item>
-    <ion-item lines="full">
-      <ion-checkbox slot="start" label-placement="end" v-model="seating"
-        >Adequate Seating?</ion-checkbox
-      >
-    </ion-item>
-    <ion-item>
-      <ion-input
-        label="Drink Name"
-        v-model="drinkName"
-        label-placement="stacked"
-        placeholder="Super Latte"
-      />
-    </ion-item>
-    <ion-item lines="full">
-      <ion-checkbox slot="start" label-placement="end" v-model="foodAvailable"
-        >Food available?</ion-checkbox
-      >
-    </ion-item>
-    <ion-item v-if="foodAvailable">
-      <ion-select
-        label="Food Options"
-        label-placement="floating"
-        v-model="selectedFoodOptions"
-        multiple
-      >
-        <ion-select-option
-          v-for="option in foodOptions"
-          :key="option"
-          :value="option"
+  <div class="entry-form-container">
+    <ion-list>
+      <ion-item>
+        <ion-input
+          label="Coffee Shop Name"
+          v-model="coffeeShop"
+          label-placement="stacked"
+          placeholder="World's Greatest Coffee"
+        />
+      </ion-item>
+      <ion-item>
+        <ion-input
+          label="Location"
+          v-model="location"
+          label-placement="stacked"
+          placeholder="Earth"
+        />
+      </ion-item>
+      <ion-item>
+        <ion-label>Cost</ion-label>
+        <CostScale v-model="cost" />
+      </ion-item>
+      <ion-item>
+        <ion-label>Vibe</ion-label>
+        <ion-range
+          :label="vibeLabel"
+          label-placement="end"
+          :min="1"
+          :max="5"
+          :step="1"
+          snaps
+          v-model="vibe"
+        />
+      </ion-item>
+      <ion-item lines="full">
+        <ion-checkbox slot="start" label-placement="end" v-model="wifi"
+          >Good WiFi?</ion-checkbox
         >
-          {{ option }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Rating</ion-label>
-      <ion-range
-        :label="ratingLabel"
-        label-placement="end"
-        :min="1"
-        :max="5"
-        :step="1"
-        snaps
-        v-model="rating"
-      />
-    </ion-item>
-    <ion-item>
-      <ion-textarea
-        label="Notes"
-        label-placement="stacked"
-        v-model="notes"
-        placeholder="Cool latte art, nice location, friendly baristas..."
-      />
-    </ion-item>
-  </ion-list>
-  <ion-button
-    expand="block"
-    id="open-toast"
-    class="ion-margin-top"
-    style="width: 90%; margin-left: 5%"
-    @click="saveEntry"
-  >
-    Save Entry
-  </ion-button>
-  <ion-toast
-    trigger="open-toast"
-    position="top"
-    position-anchor="open-toast"
-    message="Coffee entry saved, drink up!"
-    :duration="5000"
-  ></ion-toast>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-checkbox slot="start" label-placement="end" v-model="seating"
+          >Adequate Seating?</ion-checkbox
+        >
+      </ion-item>
+      <ion-item>
+        <ion-input
+          label="Drink Name"
+          v-model="drinkName"
+          label-placement="stacked"
+          placeholder="Super Latte"
+        />
+      </ion-item>
+      <ion-item lines="full">
+        <ion-checkbox slot="start" label-placement="end" v-model="foodAvailable"
+          >Food available?</ion-checkbox
+        >
+      </ion-item>
+      <ion-item v-if="foodAvailable">
+        <ion-select
+          label="Food Options"
+          label-placement="floating"
+          v-model="selectedFoodOptions"
+          multiple
+        >
+          <ion-select-option
+            v-for="option in foodOptions"
+            :key="option"
+            :value="option"
+          >
+            {{ option }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Rating</ion-label>
+        <ion-range
+          :label="ratingLabel"
+          label-placement="end"
+          :min="1"
+          :max="5"
+          :step="1"
+          snaps
+          v-model="rating"
+        />
+      </ion-item>
+      <ion-item>
+        <ion-textarea
+          label="Notes"
+          label-placement="stacked"
+          v-model="notes"
+          placeholder="Cool latte art, nice location, friendly baristas..."
+        />
+      </ion-item>
+    </ion-list>
+    <ion-button
+      expand="block"
+      id="open-toast"
+      class="save-button"
+      style="width: 90%; margin-left: 5%"
+      @click="saveEntry"
+    >
+      Save Entry
+    </ion-button>
+    <ion-toast
+      trigger="open-toast"
+      position="top"
+      position-anchor="open-toast"
+      message="Coffee entry saved, drink up!"
+      :duration="5000"
+    ></ion-toast>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -180,4 +182,14 @@ const saveEntry = async () => {
 };
 </script>
 
-<style></style>
+<style>
+.entry-form-container {
+  background: var(--ion-background-color);
+  padding-bottom: 24px;
+}
+
+.save-button {
+  width: 90%;
+  margin: 24px auto 0;
+}
+</style>
