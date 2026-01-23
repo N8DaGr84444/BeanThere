@@ -101,7 +101,8 @@ ion-select {
 }
 
 ion-item {
-  --background: #f3e2c7;
+  /* --background: #f3e2c7; */
+  --background: #ffffff;
   --border-color: #d8b58a;
   margin-bottom: 4px;
 }
@@ -123,4 +124,8 @@ ion-button.save-button {
 ion-list {
   border-radius: 12px;
   overflow: hidden;
+}
+
+ion-content {
+  --padding-bottom: env(safe-area-inset-bottom);
 }

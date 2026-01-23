@@ -5,7 +5,7 @@
         <ion-title><ion-icon :icon="cafeOutline" />BeanThere History</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content :fullscreen="false">
+    <ion-content :fullscreen="true">
       <ion-list>
         <ion-item
           v-for="entry in entries"
@@ -32,16 +32,16 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  onIonViewWillEnter,
 } from "@ionic/vue";
 import { cafeOutline } from "ionicons/icons";
-import { ref } from "vue";
-import { getEntries } from "@/entriesRepo";
-import type { CoffeeEntry } from "@/entriesRepo";
+import { ref, onMounted } from "vue";
+import { getEntriesRepo } from "@/repos/entries/entries.repo";
+import type { CoffeeEntry } from "@/repos/entries/entries.types";
 
 const entries = ref<Array<CoffeeEntry>>([]);
 
-onIonViewWillEnter(async () => {
-  entries.value = await getEntries();
+onMounted(async () => {
+  const repo = await getEntriesRepo();
+  entries.value = await repo.getEntries();
 });
 </script>

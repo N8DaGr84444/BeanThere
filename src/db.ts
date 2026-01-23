@@ -1,36 +1,23 @@
 import { Capacitor } from "@capacitor/core";
 import {
   CapacitorSQLite,
-  SQLiteConnection,
   SQLiteDBConnection,
 } from "@capacitor-community/sqlite";
 
-let sqlite: SQLiteConnection | null = null;
 let db: SQLiteDBConnection | null = null;
 
-export const getDb = async (): Promise<SQLiteDBConnection> => {
-  if (db) {
-    const isOpen = await db.isDBOpen();
-    if (isOpen) {
-      return db;
-    }
+export async function getDb() {
+  if (db) return db;
+
+  // Web: do not use SQLite, use mock data instead
+  if (Capacitor.getPlatform() === "web") {
+    throw new Error("SQLite is not supported on web in this app");
   }
 
-  sqlite = new SQLiteConnection(CapacitorSQLite);
-
-  // WEB ONLY SETUP
-  if (!Capacitor.isNativePlatform()) {
-    await customElements.whenDefined("jeep-sqlite");
-    await sqlite.initWebStore();
-  }
-
-  db = await sqlite.createConnection(
-    "beanthere",
-    false,
-    "no-encryption",
-    1,
-    false,
-  );
+  db = await CapacitorSQLite.createConnection({
+    database: "beanthere",
+    version: 1,
+  });
 
   await db.open();
 
@@ -52,4 +39,4 @@ export const getDb = async (): Promise<SQLiteDBConnection> => {
   `);
 
   return db;
-};
+}

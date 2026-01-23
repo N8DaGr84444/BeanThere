@@ -128,7 +128,7 @@ import {
 } from "@ionic/vue";
 import { ref, computed } from "vue";
 import CostScale from "@/components/CostScale.vue";
-import { addEntry } from "@/entriesRepo";
+import { getEntriesRepo } from "@/repos/entries/entries.repo";
 
 const coffeeShop = ref<string>("");
 const location = ref<string>("");
@@ -161,7 +161,10 @@ const resetForm = () => {
 
 const saveEntry = async () => {
   try {
-    const entry = await addEntry({
+    const repo = await getEntriesRepo();
+
+    const entry = await repo.addEntry({
+      // const entry = {
       shop_name: coffeeShop.value,
       shop_location: location.value,
       cost_level: cost.value,
@@ -173,6 +176,7 @@ const saveEntry = async () => {
       rating: rating.value,
       notes: notes.value,
     });
+    // };
     console.log("Entry saved: ", entry);
   } catch (error) {
     console.error("Error saving entry: ", error);

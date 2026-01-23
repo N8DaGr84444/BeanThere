@@ -5,7 +5,7 @@
         <ion-title>Profile</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content :fullscreen="false">
+    <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
           <ion-title size="large">Profile</ion-title>
